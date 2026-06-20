@@ -45,6 +45,8 @@ type Account struct {
 type SignServer struct {
 	URL   string `yaml:"url"`
 	Token string `yaml:"token"`
+	// Offset 内置签名函数偏移，仅对 url: builtin 生效。
+	Offset string `yaml:"offset"`
 }
 
 // Config 总配置文件

@@ -16,17 +16,16 @@ account: # 账号相关
   # 是否允许发送临时会话消息
   allow-temp-session: false
 
-  # 数据包的签名服务器列表，第一个作为主签名服务器，后续作为备用
-  # 与android签名不兼容
-  # 示例:
+  # 数据包签名配置，按顺序尝试；与 Android 签名不兼容
+  # 内置签名仅支持 Linux/WSL+cgo，builtin 读取当前目录的 wrapper.node
   # sign-servers:
+  #   - url: 'builtin' # 也可写 builtin:/path/to/dir 指定目录
+  #     offset: '0x5BD3EA1' # 可选，不填使用默认偏移
   #   - url: 'http://127.0.0.1:8080' # 本地签名服务器
   #   - url: 'https://signserver.example.com' # 线上签名服务器
-  #   ...
-  #
-  # 参考 https://github.com/LagrangeDev/SignApiGuide
   sign-servers:
-    - url: 'https://sign.lagrangecore.org/api/sign/sec-sign'  # 主签名服务器地址， 必填
+    - url: 'builtin'
+      offset: '0x5BD3EA1'
       token: ''
     - url: '-'  # 备用
       token: ''

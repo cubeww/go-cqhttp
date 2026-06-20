@@ -211,7 +211,7 @@ func LoginInteract() {
 		time.Sleep(time.Second * 5)
 	}
 	log.Info("开始尝试登录并同步消息...")
-	app := auth.AppList["linux"]["3.2.26-46494"]
+	app := defaultLinuxAppInfo()
 	log.Infof("使用协议: %s", app.CurrentVersion)
 	cli = newClient(app)
 	cli.UseDevice(device)
@@ -427,6 +427,16 @@ func PasswordHashDecrypt(encryptedPasswordHash string, key []byte) ([]byte, erro
 	cipher.Decrypt(result, ciphertext)
 
 	return result, nil
+}
+
+func defaultLinuxAppInfo() *auth.AppInfo {
+	app := *auth.AppList["linux"]["3.2.26-46494"]
+	app.CurrentVersion = "3.2.29-49738"
+	app.BuildVersion = 49738
+	app.PackageSign = "V1_LNX_NQ_3.2.29-49738_GW_B"
+	app.SubAppID = 537352357
+	app.AppClientVersion = 49738
+	return &app
 }
 
 func newClient(app *auth.AppInfo) *client.QQClient {
